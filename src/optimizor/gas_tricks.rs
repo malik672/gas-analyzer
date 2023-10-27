@@ -1,7 +1,10 @@
 use regex::Regex;
 
 pub fn bytes32(contract: &str) {
-  let variable_declaration_regex = Regex::new(r"(bytes32 (public|private|internal) (constant|immutable))\s*\b([a-zA-Z_]\w*)\b\s*=\s*(.*)") .unwrap();
+    let variable_declaration_regex = Regex::new(
+        r"(bytes32 (public|private|internal) (constant|immutable))\s*\b([a-zA-Z_]\w*)\b\s*=\s*(.*)",
+    )
+    .unwrap();
 
     for capture in variable_declaration_regex.captures_iter(contract) {
         let modifier = capture.get(1).map_or("default", |m| m.as_str());
@@ -14,7 +17,7 @@ pub fn bytes32(contract: &str) {
 }
 
 pub fn openzepplin(contract: &str) {
-    let variable_declaration_regex = Regex::new(r"openzeppelin") .unwrap();
+    let variable_declaration_regex = Regex::new(r"openzeppelin").unwrap();
 
     for capture in variable_declaration_regex.captures_iter(contract) {
         let modifier = capture.get(0).map_or("default", |m| m.as_str());
@@ -26,7 +29,7 @@ pub fn openzepplin(contract: &str) {
 }
 
 pub fn safemath(contract: &str) {
-    let variable_declaration_regex = Regex::new(r"SafeMath") .unwrap();
+    let variable_declaration_regex = Regex::new(r"SafeMath").unwrap();
 
     for capture in variable_declaration_regex.captures_iter(contract) {
         let modifier = capture.get(0).map_or("default", |m| m.as_str());
@@ -38,7 +41,8 @@ pub fn safemath(contract: &str) {
 }
 
 pub fn token(contract: &str) {
-    let variable_declaration_regex = Regex::new(r"(string (public|private|))\s*\b([a-zA-Z_]\w*)\b\s*=\s*(.*)") .unwrap();
+    let variable_declaration_regex =
+        Regex::new(r"(string (public|private|))\s*\b([a-zA-Z_]\w*)\b\s*=\s*(.*)").unwrap();
 
     for capture in variable_declaration_regex.captures_iter(contract) {
         let modifier = capture.get(0).map_or("default", |m| m.as_str());
@@ -50,13 +54,31 @@ pub fn token(contract: &str) {
 }
 
 pub fn uint_incur_overhead(contract: &str) {
-    let variable_declaration_regex = Regex::new(r#"\((uint24|uint8|uint160|uint16)\s*(public|private|internal)\s*[^}]*bool"#) .unwrap();
+    let variable_declaration_regex =
+        Regex::new(r#"\((uint24|uint8|uint160|uint16)\s*(public|private|internal)\s*[^}]*bool"#)
+            .unwrap();
 
     for capture in variable_declaration_regex.captures_iter(contract) {
         let modifier = capture.get(0).map_or("default", |m| m.as_str());
         println!(
             "instead of a uint24, uint16 or any uint and int type apart from uint256 or int256, it's way better to use uint256 or int256: {}",
             modifier
+        );
+    }
+}
+
+pub fn check_constructor_absence(contract: &str) {
+    let constructor_regex = Regex::new(r"constructor\s*\(.*\)").unwrap();
+
+    if constructor_regex.is_match(contract) {
+        let constructor_regex_payable = Regex::new(r"constructor\s*\(.*\)").unwrap();
+
+        if constructor_regex_payable.is_match(contract) {
+            println!("making the constructor payable saves gas in deployment cost");
+        }
+    } else {
+        println!(
+            "Adding constructor to the code and making it payable saves gas in deployment cost"
         );
     }
 }

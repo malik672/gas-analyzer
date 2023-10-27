@@ -1,5 +1,4 @@
 use std::fs;
-use optimizor;
 
 fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
     // Read the contents of the Solidity file into a string
@@ -7,6 +6,11 @@ fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
 
     Ok(content)
 }
+
+mod optimizor {
+    pub mod gas_tricks;
+}
+
 
 #[cfg(test)]
 mod tests {

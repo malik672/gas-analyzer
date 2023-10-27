@@ -11,7 +11,6 @@ mod optimizor {
     pub mod gas_tricks;
 }
 
-
 #[cfg(test)]
 mod tests {
 

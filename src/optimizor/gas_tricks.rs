@@ -176,15 +176,16 @@ pub fn use_named_retunrs(contract: &str, gas_inefficiencies: &mut Map<String, se
     ",
     )
     .unwrap();
-    let mut i = 7;
+    let lines: Vec<&str> = contract.lines().collect();
+    for (line_number, line) in lines.iter().enumerate() {
+        if regexe.captures(line).is_some() {
+            let inefficiency_id = format!("line_{}", line_number + 1);
+            println!("Use named returns");
 
-    for capture in regexe.captures_iter(contract) {
-        let modifier = capture.get(1).map_or("default", |m| m.as_str());
-        println!("Use named returns: {}", modifier);
+            gas_inefficiencies.insert(
+            inefficiency_id,
+            "instead of a uint24, uint16 or any uint and int type apart from uint256 or int256, it's way better to use uint256 or int256".into(),
+        );
+        }
     }
-    i += 1;
-    gas_inefficiencies.insert(
-        i.to_string(),
-        "instead of a uint24, uint16 or any uint and int type apart from uint256 or int256, it's way better to use uint256 or int256".into(),
-    );
 }

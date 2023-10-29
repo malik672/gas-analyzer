@@ -1,3 +1,4 @@
+use serde_json::{Map, Value};
 use std::fs;
 
 fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
@@ -12,13 +13,27 @@ mod optimizor {
 }
 
 fn main() {
-    let contract: &str = &read_sol_file("/home/malik/Desktop/revm/src/contract.sol").unwrap();
-    
-    optimizor::gas_tricks::bytes32(contract);
-    optimizor::gas_tricks::openzepplin(contract);
-    optimizor::gas_tricks::safemath(contract);
-    optimizor::gas_tricks::token(contract);
-    optimizor::gas_tricks::uint_incur_overhead(contract);
-    optimizor::gas_tricks::check_constructor_absence(contract)
- 
+    let contract: &str = &read_sol_file("./src/contract.sol").unwrap();
+
+    //create new JSON Object to store gas inefficiencies
+    let mut gas_inefficiencies = Map::new();
+
+    optimizor::gas_tricks::bytes32(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::openzepplin(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::safemath(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::token(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::uint_incur_overhead(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::check_constructor_absence(contract);
+    optimizor::gas_tricks::use_named_retunrs(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::uint_incur_overhead(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::mapping_instead_array(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::uint256_instead_bool(contract, &mut gas_inefficiencies);
+
+    // Convert the gas inefficiencies to JSON
+    let gas_inefficiencies_json =
+        serde_json::to_string_pretty(&Value::Object(gas_inefficiencies)).unwrap();
+
+    // Save the JSON to a file
+    let json_file_path = "report.json";
+    fs::write(json_file_path, gas_inefficiencies_json).expect("Unable to write JSON file");
 }

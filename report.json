@@ -1,0 +1,7 @@
+{
+  "8": "instead of a uint24, uint16 or any uint and int type apart from uint256 or int256, it's way better to use uint256 or int256",
+  "line_12": "instead of using openzeppelin we can use solady which is way cheaper and way efficient [https://github.com/Vectorized/solady",
+  "line_13": "SafeMath is no longer needed since solidity version 0.8.0, use of safeMath can be considered unnessary",
+  "line_51": "Use Uint256 instead of bytes32 to store constant",
+  "line_58": "Use Uint256 instead of bytes32 to store constant"
+}

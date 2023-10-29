@@ -22,25 +22,25 @@ mod tests {
 
     #[test]
     fn test_bytes32() {
-        let contract: &str = &read_sol_file("/home/malik/Desktop/revm/example.t.sol").unwrap();
+        let contract: &str = &read_sol_file("./revm/example.t.sol").unwrap();
         optimizor::gas_tricks::bytes32(contract);
     }
 
     #[test]
     fn test_openzeppelin() {
-        let contract: &str = &read_sol_file("/home/malik/Desktop/revm/example.t.sol").unwrap();
+        let contract: &str = &read_sol_file("./revm/example.t.sol").unwrap();
         optimizor::gas_tricks::openzepplin(contract);
     }
 
     #[test]
     fn safemath() {
-        let contract: &str = &read_sol_file("/home/malik/Desktop/revm/example.t.sol").unwrap();
+        let contract: &str = &read_sol_file("./revm/example.t.sol").unwrap();
         optimizor::gas_tricks::safemath(contract);
     }
 
     #[test]
     fn token() {
-        let contract: &str = &read_sol_file("/home/malik/Desktop/revm/example.t.sol").unwrap();
+        let contract: &str = &read_sol_file("./revm/example.t.sol").unwrap();
         optimizor::gas_tricks::token(contract);
     }
 

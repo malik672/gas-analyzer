@@ -1,4 +1,7 @@
+use reqwest;
+use reqwest::Error;
 use serde_json::{Map, Value};
+use tokio;
 use std::fs;
 
 fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
@@ -8,11 +11,24 @@ fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
     Ok(content)
 }
 
+async fn read_from_github(path: &str) -> Result<String, Error>  {
+    // Send an HTTP GET request to fetch the raw content
+   
+    let client = reqwest::Client::new();
+    let response = client.get(path).send().await?;
+    let contract_content = response.text().await?;
+    println!("{}", contract_content);
+
+     Ok(contract_content)
+
+}
+
 mod optimizor {
     pub mod gas_tricks;
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let contract: &str = &read_sol_file("./src/contract.sol").unwrap();
 
     //create new JSON Object to store gas inefficiencies
@@ -36,4 +52,5 @@ fn main() {
     // Save the JSON to a file
     let json_file_path = "report.json";
     fs::write(json_file_path, gas_inefficiencies_json).expect("Unable to write JSON file");
+
 }

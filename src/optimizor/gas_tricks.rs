@@ -189,3 +189,87 @@ pub fn use_named_retunrs(contract: &str, gas_inefficiencies: &mut Map<String, se
         }
     }
 }
+
+pub fn require_double_logic(
+    contract: &str,
+    gas_inefficiencies: &mut Map<String, serde_json::Value>,
+) {
+    let regexe = Regex::new(r"require\(.*&&.*\);").unwrap();
+    let lines: Vec<&str> = contract.lines().collect();
+    for (line_number, line) in lines.iter().enumerate() {
+        if regexe.captures(line).is_some() {
+            let inefficiency_id = format!("line_{}", line_number + 1);
+            println!("split require statements ");
+
+            gas_inefficiencies.insert(
+                inefficiency_id,
+                "split require statements that use && into two seperate parts to save gas ".into(),
+            );
+        }
+    }
+}
+
+pub fn revert_32(contract: &str, gas_inefficiencies: &mut Map<String, serde_json::Value>) {
+    let regexe = Regex::new(r"revert\(.*\'.{33,}\'.*\);").unwrap();
+    let lines: Vec<&str> = contract.lines().collect();
+    for (line_number, line) in lines.iter().enumerate() {
+        if regexe.captures(line).is_some() {
+            let inefficiency_id = format!("line_{}", line_number + 1);
+            println!("string length more thaan 32 ");
+
+            gas_inefficiencies.insert(
+                inefficiency_id,
+                "revert statement that has it's string longer than 32 length is always more expensive ".into(),
+            );
+        }
+    }
+}
+
+pub fn do_while(contract: &str, gas_inefficiencies: &mut Map<String, serde_json::Value>) {
+    let regexe = Regex::new(r"\bfor\s*\(").unwrap();
+    let lines: Vec<&str> = contract.lines().collect();
+    for (line_number, line) in lines.iter().enumerate() {
+        if regexe.captures(line).is_some() {
+            let inefficiency_id = format!("line_{}", line_number + 1);
+            println!("use do while loops instead of for loops ");
+
+            gas_inefficiencies.insert(
+                inefficiency_id,
+                "do while loops are cheaper than loops and consume less gas ".into(),
+            );
+        }
+    }
+}
+
+pub fn priv_constants_immut(contract: &str, gas_inefficiencies: &mut Map<String, serde_json::Value>) {
+    let regexe = Regex::new(r"\bpublic\b.*(constant | immutable)").unwrap();
+    let lines: Vec<&str> = contract.lines().collect();
+    for (line_number, line) in lines.iter().enumerate() {
+        if regexe.captures(line).is_some() {
+            let inefficiency_id = format!("line_{}", line_number + 1);
+            println!("variables that are constant should have a visibility of private");
+
+            gas_inefficiencies.insert(
+                inefficiency_id,
+                "variables that are constant should have a visibility of private".into(),
+            );
+        }
+    }
+}
+
+
+pub fn emit_loops(contract: &str, gas_inefficiencies: &mut Map<String, serde_json::Value>) {
+    let regexe = Regex::new(r"\bfor\s*\(\s*.*emit").unwrap();
+    let lines: Vec<&str> = contract.lines().collect();
+    for (line_number, line) in lines.iter().enumerate() {
+        if regexe.captures(line).is_some() {
+            let inefficiency_id = format!("line_{}", line_number + 1);
+            println!("emiting events in loops cost more, and should be done using other means");
+
+            gas_inefficiencies.insert(
+                inefficiency_id,
+                "emiting events in loops cost more, and should be done using other means".into(),
+            );
+        }
+    }
+}

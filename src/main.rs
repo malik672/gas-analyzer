@@ -3,6 +3,7 @@ use reqwest::Error;
 use serde_json::{Map, Value};
 use tokio;
 use std::fs;
+mod config;
 
 fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
     // Read the contents of the Solidity file into a string
@@ -30,6 +31,7 @@ mod optimizor {
 #[tokio::main]
 async fn main() {
     let contract: &str = &read_sol_file("./src/contract.sol").unwrap();
+    config::cli();
 
     //create new JSON Object to store gas inefficiencies
     let mut gas_inefficiencies = Map::new();
@@ -44,6 +46,11 @@ async fn main() {
     optimizor::gas_tricks::uint_incur_overhead(contract, &mut gas_inefficiencies);
     optimizor::gas_tricks::mapping_instead_array(contract, &mut gas_inefficiencies);
     optimizor::gas_tricks::uint256_instead_bool(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::require_double_logic(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::revert_32(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::do_while(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::priv_constants_immut(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::emit_loops(contract, &mut gas_inefficiencies);
 
     // Convert the gas inefficiencies to JSON
     let gas_inefficiencies_json =

@@ -14,7 +14,7 @@ fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
 
 async fn read_from_github(path: &str) -> Result<String, Error>  {
     // Send an HTTP GET request to fetch the raw content
-   
+    //Path should be in this format: https://raw.githubusercontent.com/user/repo/master/contract.sol
     let client = reqwest::Client::new();
     let response = client.get(path).send().await?;
     let contract_content = response.text().await?;
@@ -30,27 +30,40 @@ mod optimizor {
 
 #[tokio::main]
 async fn main() {
-    let contract: &str = &read_sol_file("./src/contract.sol").unwrap();
-    config::cli();
+   
+     // Parse command-line arguments using the config module
+     let (input_file, github_url) = config::parse_args();
+
+     // Initialize the contract variable
+     let  contract: String;
+     
+     if let Some(url) = github_url {
+        // Read from a GitHub URL
+        contract = read_from_github(&url).await.unwrap();
+    } else {
+        // Read from a local file
+        contract = read_sol_file(&input_file).unwrap();
+    }
+
 
     //create new JSON Object to store gas inefficiencies
     let mut gas_inefficiencies = Map::new();
 
-    optimizor::gas_tricks::bytes32(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::openzepplin(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::safemath(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::token(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::uint_incur_overhead(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::check_constructor_absence(contract);
-    optimizor::gas_tricks::use_named_retunrs(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::uint_incur_overhead(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::mapping_instead_array(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::uint256_instead_bool(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::require_double_logic(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::revert_32(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::do_while(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::priv_constants_immut(contract, &mut gas_inefficiencies);
-    optimizor::gas_tricks::emit_loops(contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::bytes32(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::openzepplin(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::safemath(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::token(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::uint_incur_overhead(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::check_constructor_absence(&contract);
+    optimizor::gas_tricks::use_named_retunrs(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::uint_incur_overhead(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::mapping_instead_array(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::uint256_instead_bool(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::require_double_logic(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::revert_32(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::do_while(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::priv_constants_immut(&contract, &mut gas_inefficiencies);
+    optimizor::gas_tricks::emit_loops(&contract, &mut gas_inefficiencies);
 
     // Convert the gas inefficiencies to JSON
     let gas_inefficiencies_json =

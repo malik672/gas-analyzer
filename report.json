@@ -1,6 +1,6 @@
 {
   "line_12": "instead of using openzeppelin we can use solady which is way cheaper and way efficient [https://github.com/Vectorized/solady",
   "line_13": "SafeMath is no longer needed since solidity version 0.8.0, use of safeMath can be considered unnessary",
-  "line_51": "Use Uint256 instead of bytes32 to store constant",
-  "line_58": "Use Uint256 instead of bytes32 to store constant"
+  "line_51": "variables that are constant should have a visibility of private",
+  "line_58": "variables that are constant should have a visibility of private"
 }

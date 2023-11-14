@@ -1,0 +1,46 @@
+{
+  "_format": "ethers-rs-sol-cache-3",
+  "paths": {
+    "artifacts": "artifacts",
+    "build_infos": "artifacts/build-info",
+    "sources": "contracts",
+    "tests": "test",
+    "scripts": "script",
+    "libraries": [
+      "node_modules"
+    ]
+  },
+  "files": {
+    "src/contract.sol": {
+      "lastModificationDate": 1699959572526,
+      "contentHash": "f3613cf746d20faaf0808270629634c2",
+      "sourceName": "src/contract.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "shanghai",
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": "=0.8.12",
+      "artifacts": {}
+    }
+  }
+}

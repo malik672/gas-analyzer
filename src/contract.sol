@@ -2,15 +2,14 @@
 
 /// Copyright (C) 2023 Brahma.fi
 
-pragma solidity 0.8.19;
+pragma solidity 0.8.12;
 
 /**
  * @title TypeHashHelper
  * @author Brahma.fi
  * @notice Helper library containing functions to build EIP712 struct and type hashes
  */
- import "@openzeppelin/contracts/utils/math/SafeCast.sol";
- import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+ 
 library TypeHashHelper {
     /**
      * @notice Structural representation of transaction details

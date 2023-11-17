@@ -1,10 +1,1 @@
-{
-  "line_50": [
-    "Use Uint256 instead of bytes32 to store constant",
-    "variables that are constant should have a visibility of private"
-  ],
-  "line_57": [
-    "Use Uint256 instead of bytes32 to store constant",
-    "variables that are constant should have a visibility of private"
-  ]
-}
+{}

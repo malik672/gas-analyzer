@@ -41,6 +41,10 @@ pub async fn loader() {
        let contract = read_sol_file("src/contract.sol").unwrap();
     // }
 
+    //Generate the ast
+    optimizor::ast::ast();
+
+    optimizor::write_zero_to_storage::write_zero_to_storage();
 
     //create new JSON Object to store gas inefficiencies
     let mut gas_inefficiencies = Map::new();

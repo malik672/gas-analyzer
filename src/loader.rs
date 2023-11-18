@@ -44,8 +44,6 @@ pub async fn loader() {
     //Generate the ast
     optimizor::ast::ast();
 
-  
-
     //create new JSON Object to store gas inefficiencies
     let mut gas_inefficiencies = Map::new();
 

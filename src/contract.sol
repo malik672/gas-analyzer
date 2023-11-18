@@ -1,23 +1,14 @@
-/// SPDX-License-Identifier: BUSL-1.1
-
-/// Copyright (C) 2023 Brahma.fi
-
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
 
-/**
- * @title TypeHashHelper
- * @author Brahma.fi
- * @notice Helper library containing functions to build EIP712 struct and type hashes
- */
- 
-contract TypeHashHelper {
-   uint public reds;
-   function red() public {
-      uint x = 3 +2;
-      reds = 0;
-   }
+contract Counter1 {
+    uint256 public number;
+    string private ionize;
+    bool private localize;
 
-   function destroy() public {
-      reds = 0;
-   }
+    function increment() public {
+        require(number < 10);
+        number = number + 1;
+    }
 }
+

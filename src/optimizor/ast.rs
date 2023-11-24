@@ -15,5 +15,5 @@ pub fn ast() {
        let s_asts = binding.as_mut().unwrap();
        let ast = s_asts.get(0).unwrap().source_file.ast.clone().unwrap();
        let ast_json = serde_json::to_string(&ast).unwrap();
-       let write = fs::write("src/optimizor/ast.json", ast_json).expect("failed to write ast");
+       fs::write("src/optimizor/ast.json", ast_json).expect("failed to write ast");
 }

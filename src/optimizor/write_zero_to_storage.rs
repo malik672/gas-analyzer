@@ -53,14 +53,14 @@ pub fn write_zero_to_storage(gas_inefficiencies: &mut Map<String, serde_json::Va
                                                                 .unwrap_or(true)
                                                             {
                                                                 _prev = get_line_number_zero(_name, _prev);
-                                                                let mut inefficiency_id = format!("line_{}", get_line_number_zero(_name, _prev));
+                                                                let mut _inefficiency_id = format!("line_{}", get_line_number_zero(_name, _prev));
                                                                
                                                                 get_line_number_zero(_name, _prev);
-                                                                 inefficiency_id = format!("line_{}",  _prev);
+                                                                 _inefficiency_id = format!("line_{}",  _prev);
                                                                 // Check if the slot exists in the map
                                                                 if let Some(existing_value) =
                                                                     gas_inefficiencies
-                                                                        .get_mut(&inefficiency_id)
+                                                                        .get_mut(&_inefficiency_id)
                                                                 {
                                                                     // Slot exists, append the new issue to the existing array
                                                                     let mut existing_arr: Vec<
@@ -74,14 +74,14 @@ pub fn write_zero_to_storage(gas_inefficiencies: &mut Map<String, serde_json::Va
 
                                                                     // Update the value in the map
                                                                     gas_inefficiencies.insert(
-                                                                        inefficiency_id,
+                                                                        _inefficiency_id,
                                                                         json!(existing_arr),
                                                                     );
                                                                 } else {
                                                                     // Slot doesn't exist, create a new entry with a new array
                                                                     let new_arr = vec!["avoid writing zero to storage slot"];
                                                                     gas_inefficiencies.insert(
-                                                                        inefficiency_id,
+                                                                        _inefficiency_id,
                                                                         json!(new_arr),
                                                                     );
                                                                 }

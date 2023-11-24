@@ -1,7 +1,7 @@
 // config.rs
 use clap::{App, Arg};
 
-pub fn parse_args() -> (String, Option<String>) {
+pub fn _parse_args() -> (String, Option<String>) {
     let matches = App::new("Solidity Contract Analyzer")
         .version("1.0")
         .author("Malik")

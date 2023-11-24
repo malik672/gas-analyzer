@@ -12,8 +12,8 @@
   },
   "files": {
     "src/contract.sol": {
-      "lastModificationDate": 1700311238224,
-      "contentHash": "28ea6601f023bdb343631464f98166b1",
+      "lastModificationDate": 1700762187306,
+      "contentHash": "4cfab11a6c48fe1603a2ee6922e55b0a",
       "sourceName": "src/contract.sol",
       "solcConfig": {
         "settings": {

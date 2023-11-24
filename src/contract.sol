@@ -7,8 +7,8 @@ contract Counter1 {
     bool private localize;
 
     function increment() public {
-        require(number < 10);
-        number = number + 1;
+        require(10 > number);
+        require(20 > number);
     }
 }
 

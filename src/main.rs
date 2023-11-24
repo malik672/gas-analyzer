@@ -2,6 +2,7 @@ use tokio;
 mod config;
 mod loader;
 mod optimizor;
+mod utils;
 
 
 #[tokio::main]

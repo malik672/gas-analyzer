@@ -2,7 +2,6 @@ use regex::Regex;
 use serde_json::json;
 use serde_json::Map;
 
-
 pub fn openzepplin(contract: &str, gas_inefficiencies: &mut Map<String, serde_json::Value>) {
     let variable_declaration_regex = Regex::new(r"openzeppelin").unwrap();
 

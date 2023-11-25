@@ -18,16 +18,13 @@ pub fn use_named_retunrs(contract: &str, gas_inefficiencies: &mut Map<String, se
                 let mut existing_arr: Vec<String> =
                     serde_json::from_value(existing_value.clone()).unwrap_or_default();
 
-                existing_arr.push(
-                    "Use named returns".to_string(),
-                );
+                existing_arr.push("Use named returns".to_string());
 
                 // Update the value in the map
                 gas_inefficiencies.insert(inefficiency_id, json!(existing_arr));
             } else {
                 // Slot doesn't exist, create a new entry with a new array
-                let new_arr =
-                    vec!["Use named returns"];
+                let new_arr = vec!["Use named returns"];
                 gas_inefficiencies.insert(inefficiency_id, json!(new_arr));
             }
             println!("Use named returns");

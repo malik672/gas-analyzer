@@ -89,7 +89,7 @@ pub fn cache_state_variables(
                                                         .and_then(Value::as_array)
                                                     {
                                                         for argument in arguments {
-                                                            if let Some(left_E) =
+                                                            if let Some(_left_e) =
                                                                 argument.get("leftExpression")
                                                             {
                                                                 let name = argument
@@ -174,7 +174,7 @@ fn get_line_number_zero(src: &str, mut _prev: usize) -> usize {
                     _prev = line_number + 1;
                     break;
                 }
-                times = times + 1;
+                times += 1;
             }
         }
     }

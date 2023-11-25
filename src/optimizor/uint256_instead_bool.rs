@@ -21,18 +21,14 @@ pub fn uint256_instead_bool(
                 let mut existing_arr: Vec<String> =
                     serde_json::from_value(existing_value.clone()).unwrap_or_default();
 
-                existing_arr.push(
-                    "Use uint256 type to store boolean value instead of bool"
-                        .to_string(),
-                );
+                existing_arr
+                    .push("Use uint256 type to store boolean value instead of bool".to_string());
 
                 // Update the value in the map
                 gas_inefficiencies.insert(inefficiency_id, json!(existing_arr));
             } else {
                 // Slot doesn't exist, create a new entry with a new array
-                let new_arr = vec![
-                    "Use uint256 type to store boolean value instead of bool",
-                ];
+                let new_arr = vec!["Use uint256 type to store boolean value instead of bool"];
                 gas_inefficiencies.insert(inefficiency_id, json!(new_arr));
             }
 

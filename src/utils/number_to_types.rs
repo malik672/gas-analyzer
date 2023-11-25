@@ -1,0 +1,72 @@
+use crate::utils::data_types::SolDataTypes;
+use serde_json::{json, Map, Value};
+
+pub fn number_to_types() -> Map<String, Value> {
+    let mut map: Map<String, Value> = Map::new();
+
+    map.insert(
+        "1".to_string(),
+        json!(SolDataTypes::Bool.to_string_representation()),
+    );
+    map.insert(
+        "1.1".to_string(),
+        json!(SolDataTypes::Bytes4.to_string_representation()),
+    );
+    map.insert(
+        "1.2".to_string(),
+        json!(SolDataTypes::Uint8.to_string_representation()),
+    );
+    map.insert(
+        "1.3".to_string(),
+        json!(SolDataTypes::Int8.to_string_representation()),
+    );
+    map.insert(
+        "2".to_string(),
+        json!(SolDataTypes::Int16.to_string_representation()),
+    );
+    map.insert(
+        "2.1".to_string(),
+        json!(SolDataTypes::Uint16.to_string_representation()),
+    );
+    map.insert(
+        "3".to_string(),
+        json!(SolDataTypes::Address.to_string_representation()),
+    );
+    map.insert(
+        "3.1".to_string(),
+        json!(SolDataTypes::Uint160.to_string_representation()),
+    );
+    map.insert(
+        "3.2".to_string(),
+        json!(SolDataTypes::Bytes20.to_string_representation()),
+    );
+    map.insert(
+        "4".to_string(),
+        json!(SolDataTypes::Uint.to_string_representation()),
+    );
+    map.insert(
+        "4.1".to_string(),
+        json!(SolDataTypes::Uint256.to_string_representation()),
+    );
+    map.insert(
+      "4.2".to_string(),
+        json!(SolDataTypes::Bytes32.to_string_representation()),
+    );
+    map.insert(
+        "4.3".to_string(),
+        json!(SolDataTypes::Int.to_string_representation()),
+    );
+    map.insert(
+        "4.4".to_string(),
+        json!(SolDataTypes::Int256.to_string_representation()),
+    );
+    map.insert(
+        "5".to_string(),
+        json!(SolDataTypes::Strings.to_string_representation()),
+    );
+    map.insert(
+        "5.1".to_string(),
+        json!(SolDataTypes::Bytes.to_string_representation()),
+    );
+    map
+}

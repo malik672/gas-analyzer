@@ -1,6 +1,4 @@
 use regex::Regex;
-use serde_json::json;
-use serde_json::Map;
 
 pub fn check_constructor_absence(contract: &str) {
     let constructor_regex = Regex::new(r"constructor\s*\(.*\)").unwrap();

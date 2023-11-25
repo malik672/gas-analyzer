@@ -1,8 +1,6 @@
-use reqwest;
-use reqwest::Error;
+use crate::optimizor;
 use serde_json::{Map, Value};
 use std::fs;
-use crate::optimizor;
 
 fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
     // Read the contents of the Solidity file into a string
@@ -11,41 +9,28 @@ fn read_sol_file(file_path: &str) -> Result<String, std::io::Error> {
     Ok(content)
 }
 
-// async fn read_from_github(path: &str) -> Result<String, Error>  {
-//     // Send an HTTP GET request to fetch the raw content
-//     //Path should be in this format: https://raw.githubusercontent.com/user/repo/master/contract.sol
-//     let client = reqwest::Client::new();
-//     let response = client.get(path).send().await?;
-//     let contract_content = response.text().await?;
-//     println!("{}", contract_content);
-
-//      Ok(contract_content)
-
-// }
-
 
 pub async fn loader() {
-   
     //  // Parse command-line arguments using the config module
     //  let (input_file, github_url) = config::parse_args();
 
     //  // Initialize the contract variable
     //  let  contract: String;
-     
+
     //  if let Some(url) = github_url {
     //     // Read from a GitHub URL
     //     contract = read_from_github(&url).await.unwrap();
     // } else {
     //     // Read from a local file
-       let contract = read_sol_file("src/contract.sol").unwrap();
+    let contract = read_sol_file("src/contract.sol").unwrap();
     // }
 
     //Generate the ast
     optimizor::ast::ast();
 
-    //create new JSON Object to store gas 
+    //create new JSON Object to store gas
     let mut gas_inefficiencies = Map::new();
-
+    optimizor::struct_packing::struct_packing(&mut gas_inefficiencies, 0);
     optimizor::cache_state_variables::cache_state_variables(&mut gas_inefficiencies, 0);
     optimizor::write_zero_to_storage::write_zero_to_storage(&mut gas_inefficiencies, 0);
     optimizor::bytes32::bytes32(&contract, &mut gas_inefficiencies);
@@ -70,5 +55,4 @@ pub async fn loader() {
     // Save the JSON to a file
     let json_file_path = "report.json";
     fs::write(json_file_path, gas_inefficiencies_json).expect("Unable to write JSON file");
-
 }

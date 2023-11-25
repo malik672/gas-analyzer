@@ -1,1 +1,5 @@
-{}
+{
+  "line_7": [
+    "struct is arraged wrongly should be arranged in this way [\"uint8\", \"bytes20\", \"uint\", \"string\"]"
+  ]
+}

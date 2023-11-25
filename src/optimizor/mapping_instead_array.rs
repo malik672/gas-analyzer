@@ -21,18 +21,13 @@ pub fn mapping_instead_array(
                 let mut existing_arr: Vec<String> =
                     serde_json::from_value(existing_value.clone()).unwrap_or_default();
 
-                existing_arr.push(
-                    "Use mapping instead of array: Modifier:"
-                        .to_string(),
-                );
+                existing_arr.push("Use mapping instead of array: Modifier:".to_string());
 
                 // Update the value in the map
                 gas_inefficiencies.insert(inefficiency_id, json!(existing_arr));
             } else {
                 // Slot doesn't exist, create a new entry with a new array
-                let new_arr = vec![
-                    "Use mapping instead of array: Modifier:",
-                ];
+                let new_arr = vec!["Use mapping instead of array: Modifier:"];
                 gas_inefficiencies.insert(inefficiency_id, json!(new_arr));
             }
 

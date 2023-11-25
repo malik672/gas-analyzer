@@ -15,9 +15,9 @@
 // mod tests {
 
 //     use super::*;
-    
+
 //     mod src {
-       
+
 //     }
 
 //     #[test]
@@ -56,5 +56,4 @@
 //         optimizor::gas_tricks::check_constructor_absence(contract);
 //     }
 
-    
 // }

@@ -2,7 +2,6 @@ use regex::Regex;
 use serde_json::json;
 use serde_json::Map;
 
-
 pub fn uint_incur_overhead(
     contract: &str,
     gas_inefficiencies: &mut Map<String, serde_json::Value>,

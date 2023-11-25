@@ -1,7 +1,11 @@
 use serde_json::json;
 use serde_json::Map;
 
-pub fn update_gas_inefficency_map(inefficiency_id: String,  gas_inefficiencies: &mut Map<String, serde_json::Value>, err: String) {
+pub fn update_gas_inefficency_map(
+    inefficiency_id: String,
+    gas_inefficiencies: &mut Map<String, serde_json::Value>,
+    err: String,
+) {
     // Check if the slot exists in the map
     if let Some(existing_value) = gas_inefficiencies.get_mut(&inefficiency_id) {
         // Slot exists, append the new issue to the existing array

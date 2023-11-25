@@ -1,6 +1,6 @@
+use serde_json;
 use serde_json::Value;
 use std::fs;
-use serde_json;
 
 pub fn get_all_state_vars() -> serde_json::Map<std::string::String, Value> {
     let ast_json = fs::read_to_string("src/optimizor/ast.json").expect("Failed to read");
@@ -21,9 +21,15 @@ pub fn get_all_state_vars() -> serde_json::Map<std::string::String, Value> {
                                     && state_node.get("stateVariable").and_then(Value::as_bool)
                                         == Some(true)
                                 {
-                                    obj.insert(state_node.get("name").unwrap().as_str().unwrap().to_owned(), 
-                                    serde_json::to_value(true).unwrap());
-
+                                    obj.insert(
+                                        state_node
+                                            .get("name")
+                                            .unwrap()
+                                            .as_str()
+                                            .unwrap()
+                                            .to_owned(),
+                                        serde_json::to_value(true).unwrap(),
+                                    );
                                 }
                             }
                         }

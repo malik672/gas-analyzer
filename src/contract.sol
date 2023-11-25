@@ -2,13 +2,14 @@
 pragma solidity 0.8.12;
 
 contract Counter1 {
-    uint256 public number;
-    string private ionize;
-    bool private localize;
+ 
 
-    function increment() public {
-        require(10 > number);
-        require(20 > number);
+    struct red {
+        uint errrr;
+        string unite;
+        uint8 ras3;
+        bytes20 dear;
     }
+
 }
 

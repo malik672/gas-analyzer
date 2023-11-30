@@ -158,7 +158,7 @@ fn get_line_number_zero(src: &str, mut _prev: usize) -> usize {
     let lines: Vec<&str> = contract.lines().collect();
 
     // Format the string with " = 0" at the end
-    let strss = format!(r"{}", src);
+    let strss = src.to_string();
 
     // Compile the regex pattern for any function declaration
     let any_function_declaration_regex = Regex::new(r"function\s+\w*\s*\(").unwrap();

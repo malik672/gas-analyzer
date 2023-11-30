@@ -2,14 +2,15 @@
 pragma solidity 0.8.12;
 
 contract Counter1 {
- 
+  bool public baol;
+  string private redss;
+  uint public tinu;
+  uint8 public vv;
+  address public erd;
+  bytes20 public sad;
 
-    struct red {
-        uint errrr;
-        string unite;
-        uint8 ras3;
-        bytes20 dear;
-    }
-
+  function red() public {
+    e = 4;
+  }
 }
 

@@ -4,3 +4,4 @@ pub mod data_types;
 pub mod types_to_numbers;
 pub mod number_to_types;
 pub mod extract_struct_node;
+pub mod extract_state_vars;

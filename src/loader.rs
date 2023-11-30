@@ -31,6 +31,7 @@ pub async fn loader() {
     //create new JSON Object to store gas
     let mut gas_inefficiencies = Map::new();
     optimizor::struct_packing::struct_packing(&mut gas_inefficiencies, 0);
+    optimizor::pack_related_vars::pack_related_vars(&mut gas_inefficiencies, 0);
     optimizor::cache_state_variables::cache_state_variables(&mut gas_inefficiencies, 0);
     optimizor::write_zero_to_storage::write_zero_to_storage(&mut gas_inefficiencies, 0);
     optimizor::bytes32::bytes32(&contract, &mut gas_inefficiencies);

@@ -1,5 +1,8 @@
 {
-  "line_7": [
-    "struct is arraged wrongly should be arranged in this way [\"uint8\", \"bytes20\", \"uint\", \"string\"]"
+  "line_0": [
+    "cache state variables"
+  ],
+  "line_10": [
+    "state variables is arraged wrongly should be arranged in this way [\"bool\", \"uint8\", \"address\", \"bytes20\", \"uint\", \"string\"]"
   ]
 }

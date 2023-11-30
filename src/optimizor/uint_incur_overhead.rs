@@ -7,7 +7,7 @@ pub fn uint_incur_overhead(
     gas_inefficiencies: &mut Map<String, serde_json::Value>,
 ) {
     let variable_declaration_regex =
-        Regex::new(r#"\((uint24|uint8|uint160|uint16)\s*(public|private|internal)\s*[^}]*bool"#)
+        Regex::new(r"\((uint24|uint8|uint160|uint16)\s*(public|private|internal)\s*[^}]*bool")
             .unwrap();
 
     let lines: Vec<&str> = contract.lines().collect();

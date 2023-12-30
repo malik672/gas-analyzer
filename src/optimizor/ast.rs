@@ -22,5 +22,5 @@ pub fn ast() {
         .ast
         .clone()
         .unwrap();
-    fs::write("src/optimizor/ast.json", ast_json).expect("failed to write ast");
+    fs::write("src/optimizor/ast.json", ast).expect("failed to write ast");
 }
